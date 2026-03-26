@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Josh Lee — Revival Strength</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C8853A;
+    --gold-light: #E8A055;
+    --dark: #0D1F2D;
+    --darker: #091520;
+    --mid: #1A3345;
+    --white: #F5F0E8;
+    --muted: #8FA5B4;
+    --accent: #C8853A;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--darker);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 4rem;
+    background: rgba(9,21,32,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,133,58,0.15);
+  }
+
+  .nav-logo-img {
+    height: 58px;
+    width: auto;
+    display: block;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2.5rem;
+  }
+  nav ul a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  nav ul a:hover { color: var(--gold); }
+
+  .nav-cta {
+    background: var(--gold);
+    color: var(--darker) !important;
+    padding: 0.55rem 1.4rem;
+    border-radius: 2px;
+    font-weight: 500 !important;
+  }
+  .nav-cta:hover { background: var(--gold-light); color: var(--darker) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10rem 4rem 6rem 5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.4rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 2rem;
+    height: 1px;
+    background: var(--gold);
+    display: block;
+  }
+
+  .hero-headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 7vw, 7.5rem);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+    color: var(--white);
+    margin-bottom: 1.8rem;
+  }
+  .hero-headline .italic {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    color: var(--gold);
+    display: block;
+    font-size: clamp(3.5rem, 6vw, 6.5rem);
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--muted);
+    max-width: 400px;
+    margin-bottom: 3rem;
+    font-weight: 300;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--darker);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1rem 2rem;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  .btn-ghost {
+    color: var(--white);
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 2px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, var(--darker) 0%, transparent 30%),
+                linear-gradient(to top, var(--darker) 0%, transparent 40%);
+    z-index: 1;
+  }
+
+  .hero-bg-text {
+    position: absolute;
+    bottom: -1rem;
+    right: -2rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22vw;
+    color: rgba(200,133,58,0.04);
+    line-height: 1;
+    z-index: 0;
+    letter-spacing: -0.02em;
+    pointer-events: none;
+  }
+
+  .hero-image-container {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1A3345 0%, #0D1F2D 100%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  /* placeholder silhouette graphic */
+  .hero-silhouette {
+    width: 80%;
+    max-width: 400px;
+    opacity: 0.9;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  .hero-stats {
+    position: absolute;
+    bottom: 3rem;
+    left: 5rem;
+    display: flex;
+    gap: 3rem;
+    z-index: 3;
+  }
+  .stat-item {}
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.4rem;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.2rem;
+  }
+
+  /* ── MARQUEE ── */
+  .marquee-wrap {
+    background: var(--gold);
+    overflow: hidden;
+    padding: 0.7rem 0;
+  }
+  .marquee-track {
+    display: flex;
+    gap: 0;
+    animation: marquee 20s linear infinite;
+    width: max-content;
+  }
+  .marquee-item {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    color: var(--darker);
+    padding: 0 2.5rem;
+    white-space: nowrap;
+  }
+  .marquee-dot {
+    font-size: 0.4rem;
+    vertical-align: middle;
+    opacity: 0.5;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 7rem 5rem; }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .section-label::before {
+    content: '';
+    width: 1.5rem;
+    height: 1px;
+    background: var(--gold);
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.8rem, 5vw, 5rem);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ── PILLARS ── */
+  .pillars {
+    background: var(--dark);
+  }
+  .pillars-header {
+    max-width: 600px;
+    margin-bottom: 5rem;
+  }
+  .pillars-header p {
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5px;
+  }
+
+  .pillar-card {
+    background: var(--mid);
+    padding: 3rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+    cursor: default;
+  }
+  .pillar-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s;
+  }
+  .pillar-card:hover { background: #1f3d53; }
+  .pillar-card:hover::before { transform: scaleX(1); }
+
+  .pillar-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 5rem;
+    color: rgba(200,133,58,0.12);
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    transition: color 0.3s;
+  }
+  .pillar-card:hover .pillar-number { color: rgba(200,133,58,0.25); }
+
+  .pillar-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .pillar-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.8rem;
+    color: var(--white);
+  }
+
+  .pillar-desc {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ── ABOUT ── */
+  .about {
+    background: var(--darker);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .about-image-wrap {
+    position: relative;
+  }
+  .about-image-block {
+    background: var(--mid);
+    aspect-ratio: 3/4;
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .about-image-block::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(200,133,58,0.2);
+  }
+  .about-badge {
+    position: absolute;
+    bottom: -1.5rem;
+    right: -1.5rem;
+    width: 8rem;
+    height: 8rem;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+  }
+  .about-badge-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--darker);
+    line-height: 1;
+  }
+  .about-badge-text {
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--darker);
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .about-content {}
+  .about-content p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--muted);
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+  }
+  .about-content .highlight {
+    color: var(--white);
+    font-style: italic;
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+  }
+
+  /* ── PROCESS ── */
+  .process {
+    background: var(--dark);
+  }
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 4rem;
+  }
+  .process-step {
+    padding: 2.5rem;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 2px;
+    position: relative;
+    transition: border-color 0.3s;
+  }
+  .process-step:hover { border-color: rgba(200,133,58,0.3); }
+
+  .step-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .step-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.04em;
+  }
+  .step-desc {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  /* ── NUTRITION CALLOUT ── */
+  .nutrition {
+    background: var(--darker);
+    padding: 6rem 5rem;
+  }
+  .nutrition-inner {
+    background: var(--mid);
+    border-radius: 4px;
+    padding: 5rem;
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .nutrition-inner::before {
+    content: 'FUEL';
+    position: absolute;
+    right: -1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16rem;
+    color: rgba(200,133,58,0.04);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .nutrition-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 2rem;
+  }
+  .tag {
+    background: rgba(200,133,58,0.12);
+    border: 1px solid rgba(200,133,58,0.25);
+    color: var(--gold);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+  .nutrition-rules {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .rule-item {
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+  }
+  .rule-dot {
+    width: 2rem;
+    height: 2rem;
+    background: var(--gold);
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.1rem;
+  }
+  .rule-dot svg { width: 0.9rem; height: 0.9rem; }
+  .rule-text h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.2rem;
+  }
+  .rule-text p {
+    font-size: 0.84rem;
+    color: var(--muted);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* ── TESTIMONIAL ── */
+  .testimonials {
+    background: var(--dark);
+    text-align: center;
+    padding: 7rem 5rem;
+  }
+  .testimonials .section-label { justify-content: center; }
+  .testimonials .section-label::before { display: none; }
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 4rem;
+  }
+  .testi-card {
+    background: var(--mid);
+    padding: 2.5rem;
+    border-radius: 2px;
+    text-align: left;
+    transition: transform 0.3s;
+  }
+  .testi-card:hover { transform: translateY(-4px); }
+  .testi-stars {
+    color: var(--gold);
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+  .testi-quote {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+  }
+  .testi-author {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  /* ── CTA FINAL ── */
+  .cta-section {
+    background: var(--darker);
+    padding: 8rem 5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60vw;
+    height: 60vw;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,133,58,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-section .section-title {
+    font-size: clamp(3rem, 7vw, 7rem);
+    max-width: 900px;
+    margin: 1rem auto 1.5rem;
+  }
+  .cta-section .section-title em {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    color: var(--gold);
+  }
+  .cta-sub {
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 480px;
+    margin: 0 auto 3rem;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+  .cta-social {
+    margin-top: 3rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .cta-social span { color: var(--gold); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--darker);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 2rem 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+  }
+  .footer-logo span { color: var(--gold); }
+  .footer-copy {
+    font-size: 0.75rem;
+    color: rgba(143,165,180,0.4);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── HERO SVG illustration ── */
+  .hero-figure {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 0;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <svg class="nav-logo-img" viewBox="0 0 240 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Left outer plate (round) -->
+  <circle cx="18" cy="45" r="16" fill="none" stroke="#C8853A" stroke-width="7"/>
+  <!-- Left inner collar -->
+  <rect x="34" y="38" width="8" height="14" rx="2" fill="#C8853A"/>
+  <!-- Bar left -->
+  <rect x="42" y="42" width="32" height="6" rx="2" fill="#C8853A"/>
+  <!-- Right bar -->
+  <rect x="166" y="42" width="32" height="6" rx="2" fill="#C8853A"/>
+  <!-- Right inner collar -->
+  <rect x="198" y="38" width="8" height="14" rx="2" fill="#C8853A"/>
+  <!-- Right outer plate (round) -->
+  <circle cx="222" cy="45" r="16" fill="none" stroke="#C8853A" stroke-width="7"/>
+  <!-- M / V chevron -->
+  <path d="M74 36 L97 28 L120 50 L143 28 L166 36 L120 68 Z" fill="#C8853A"/>
+  <!-- REVIVAL STRENGTH text -->
+  <text x="120" y="84" font-family="'Bebas Neue', sans-serif" font-size="12" fill="#C8853A" text-anchor="middle" letter-spacing="5">REVIVAL STRENGTH</text>
+</svg>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#pillars">Method</a></li>
+    <li><a href="#nutrition">Nutrition</a></li>
+    <li><a href="offerings.html" class="nav-cta">Apply For Coaching</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Revival Strength · Peak Performance</div>
+    <h1 class="hero-headline">
+      MASTER
+      <span class="italic">Yourself.</span>
+    </h1>
+    <p class="hero-sub">Unlock your potential through movement, nutrition, sleep, and community. Built for the long game—not the quick fix.</p>
+    <div class="hero-buttons">
+      <a href="#cta" class="btn-primary">Start Your Journey</a>
+      <a href="#pillars" class="btn-ghost">Learn the Method</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-image-overlay"></div>
+    <div class="hero-bg-text">RS</div>
+    <div class="hero-image-container">
+      <img src="assets/hero-portrait.jpg" alt="Josh Lee training" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" />
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">500+</div>
+      <div class="stat-label">Lives Transformed</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">4</div>
+      <div class="stat-label">Core Pillars</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Real Food. Real Results.</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">MOVEMENT <span class="marquee-dot">●</span></span>
+    <span class="marquee-item">NUTRITION <span class="marquee-dot">●</span></span>
+    <span class="marquee-item">SLEEP <span class="marquee-dot">●</span></span>
+    <span class="marquee-item">COMMUNITY <span class="marquee-dot">●</span></span>
+    <span class="marquee-item">FUNCTIONAL STRENGTH <span class="marquee-dot">●</span></span>
+    <span class="marquee-item">PEAK PERFORMANCE <span class="marquee-dot">●</span></span>
+    <span class="marquee-item">REVIVAL STRENGTH <span class="marquee-dot">●</span></span>
+    <span class="marquee-item">MOVEMENT <span class="marquee-dot">●</span></span>
+    <span class="marquee-item">NUTRITION <span class="marquee-dot">●</span></span>
+    <span class="marquee-item">SLEEP <span class="marquee-dot">●</span></span>
+    <span class="marquee-item">COMMUNITY <span class="marquee-dot">●</span></span>
+    <span class="marquee-item">FUNCTIONAL STRENGTH <span class="marquee-dot">●</span></span>
+    <span class="marquee-item">PEAK PERFORMANCE <span class="marquee-dot">●</span></span>
+    <span class="marquee-item">REVIVAL STRENGTH <span class="marquee-dot">●</span></span>
+  </div>
+</div>
+
+<!-- PILLARS -->
+<section class="pillars" id="pillars">
+  <div class="pillars-header fade-up">
+    <div class="section-label">The Method</div>
+    <h2 class="section-title">FOUR PILLARS OF<br>PEAK PERFORMANCE</h2>
+    <p>True performance isn't built in the gym alone. It's the sum of every habit you practice—how you eat, how you move, how you rest, and who you surround yourself with.</p>
+  </div>
+
+  <div class="pillars-grid">
+    <div class="pillar-card fade-up">
+      <div class="pillar-number">01</div>
+      <div class="pillar-title">Nutrition</div>
+      <p class="pillar-desc">Real food is the foundation. Minimally processed, whole ingredients that boost clarity, energy, and long-term health. Start with one meal and build from there.</p>
+    </div>
+    <div class="pillar-card fade-up" style="transition-delay:0.1s">
+      <div class="pillar-number">02</div>
+      <div class="pillar-title">Movement</div>
+      <p class="pillar-desc">Functional strength for life. Build a body that moves independently, performs under pressure, and keeps you capable for decades—not just seasons.</p>
+    </div>
+    <div class="pillar-card fade-up" style="transition-delay:0.2s">
+      <div class="pillar-number">03</div>
+      <div class="pillar-title">Sleep</div>
+      <p class="pillar-desc">Your body's ultimate reboot. 7–9 hours of quality sleep is non-negotiable for mental clarity, physical recovery, and sustained peak performance.</p>
+    </div>
+    <div class="pillar-card fade-up" style="transition-delay:0.3s">
+      <div class="pillar-number">04</div>
+      <div class="pillar-title">Community</div>
+      <p class="pillar-desc">You don't rise alone. Shared goals, mutual accountability, and high-vibe energy create the environment where transformation actually sticks.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-image-wrap fade-up">
+    <div class="about-image-block">
+      <img src="assets/about-portrait.jpg" alt="Josh Lee - Revival Strength Coach" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" />
+    </div>
+    <div class="about-badge">
+      <div class="about-badge-num">7+</div>
+      <div class="about-badge-text">Years<br>Coaching</div>
+    </div>
+  </div>
+
+  <div class="about-content fade-up">
+    <div class="section-label">About Josh</div>
+    <h2 class="section-title">BUILT TO<br>EMPOWER YOU</h2>
+    <p>Hi, I'm Josh Lee — Peak Performance Coach and founder of Revival Strength. My mission is simple: empower you to bring your light to the world and create the impact you were born for.</p>
+    <p class="highlight">"The journey isn't about being perfect—it's about showing up, one habit at a time."</p>
+    <p>I help driven individuals master the habits that fuel mind, body, and spirit. Not through gimmicks or shortcuts, but through proven systems that compound over time into extraordinary results.</p>
+    <a href="offerings.html" class="btn-primary" style="margin-top:1rem;">Apply For Coaching</a>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="fade-up">
+    <div class="section-label">How It Works</div>
+    <h2 class="section-title">THE SYSTEM</h2>
+  </div>
+  <div class="process-grid">
+    <div class="process-step fade-up">
+      <div class="step-num">Step 01</div>
+      <div class="step-title">Start Small</div>
+      <p class="step-desc">No overwhelming overhauls. We identify the one lever that will create the most momentum and build from there. Even a 10-minute walk changes everything.</p>
+    </div>
+    <div class="process-step fade-up" style="transition-delay:0.12s">
+      <div class="step-num">Step 02</div>
+      <div class="step-title">Build Systems</div>
+      <p class="step-desc">Goals tell you where to go. Systems get you there. We design daily routines, habits, and practices that make success inevitable—not accidental.</p>
+    </div>
+    <div class="process-step fade-up" style="transition-delay:0.24s">
+      <div class="step-num">Step 03</div>
+      <div class="step-title">Compound Gains</div>
+      <p class="step-desc">A 1% improvement daily compounds into extraordinary change over a year. Stay consistent, trust the process, and watch the results take care of themselves.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NUTRITION CALLOUT -->
+<section class="nutrition" id="nutrition">
+  <div class="nutrition-inner">
+    <div class="fade-up">
+      <div class="section-label">Real Food</div>
+      <h2 class="section-title">EAT REAL.<br>FEEL REAL.</h2>
+      <p style="color:var(--muted);font-size:0.95rem;line-height:1.75;font-weight:300;max-width:380px;margin-bottom:1.5rem;">The secret to healthy eating isn't complicated — it's real, minimally processed food. Shop the perimeter. Prep one meal. Let the habit grow.</p>
+      <div class="nutrition-tags">
+        <span class="tag">Lean Proteins</span>
+        <span class="tag">Complex Carbs</span>
+        <span class="tag">Healthy Fats</span>
+        <span class="tag">Whole Foods</span>
+        <span class="tag">Meal Prep</span>
+        <span class="tag">No Tracking Needed</span>
+      </div>
+    </div>
+    <div class="nutrition-rules fade-up">
+      <div class="rule-item">
+        <div class="rule-dot">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4.5" stroke="#0D1F2D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="rule-text">
+          <h4>Shop the Perimeter</h4>
+          <p>Fresh produce, lean proteins, and healthy fats live on the edges. The inner aisles are a trap.</p>
+        </div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4.5" stroke="#0D1F2D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="rule-text">
+          <h4>One Meal at a Time</h4>
+          <p>Don't overhaul everything. Fix breakfast this week. Lunch next week. Small changes compound.</p>
+        </div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-dot">
+          <svg viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4.5" stroke="#0D1F2D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="rule-text">
+          <h4>Ingredients = Identity</h4>
+          <p>If you can't pronounce it, you probably shouldn't eat it. The shorter the ingredient list, the cleaner the fuel.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-label">Results</div>
+  <h2 class="section-title fade-up">REAL PEOPLE.<br>REAL CHANGE.</h2>
+  <div class="testi-grid">
+    <div class="testi-card fade-up">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-quote">"Josh isn't just a trainer — he's an educator. His passion, humility, and ability to connect make learning from him exceptional. One of the greatest coaches I've ever had the opportunity to learn from. If you get the chance, don't miss it."</p>
+      <div class="testi-author">— Walker B., Georgia</div>
+    </div>
+    <div class="testi-card fade-up" style="transition-delay:0.12s">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-quote">"Within two months of training with Josh I hit new PRs in every major lift, crushed my first solo competition, and saw my cardio skyrocket — all while traveling for work. He's not just a coach, he's a true inspiration. 10/10."</p>
+      <div class="testi-author">— Dawson B., Boulder</div>
+    </div>
+    <div class="testi-card fade-up" style="transition-delay:0.24s">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-quote">"Josh started training my son and now trains our whole family. My dad was a PT — I know a great one when I see one. Josh has the perfect mix of energy and expertise to keep you moving and improving. Strong recommend."</p>
+      <div class="testi-author">— Deon A., Boulder</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <div class="section-label fade-up" style="justify-content:center;">
+    <span>Ready to Begin</span>
+  </div>
+  <h2 class="section-title fade-up">YOUR FUTURE<br>SELF IS <em>Waiting.</em></h2>
+  <p class="cta-sub fade-up">You don't have to do it all at once—and you definitely don't have to do it alone. Start where you are. Trust the process.</p>
+  <a href="mailto:josh@revivalstrength.com" class="btn-primary fade-up">Book a Free Consultation</a>
+  <p class="cta-social fade-up" style="margin-top:2rem;">Follow the journey on Instagram <span>@josh.rlee</span></p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <svg viewBox="0 0 240 90" fill="none" xmlns="http://www.w3.org/2000/svg" style="height:44px;width:auto;opacity:0.8;">
+  <circle cx="18" cy="45" r="16" fill="none" stroke="#C8853A" stroke-width="7"/>
+  <rect x="34" y="38" width="8" height="14" rx="2" fill="#C8853A"/>
+  <rect x="42" y="42" width="32" height="6" rx="2" fill="#C8853A"/>
+  <rect x="166" y="42" width="32" height="6" rx="2" fill="#C8853A"/>
+  <rect x="198" y="38" width="8" height="14" rx="2" fill="#C8853A"/>
+  <circle cx="222" cy="45" r="16" fill="none" stroke="#C8853A" stroke-width="7"/>
+  <path d="M74 36 L97 28 L120 50 L143 28 L166 36 L120 68 Z" fill="#C8853A"/>
+  <text x="120" y="84" font-family="'Bebas Neue', sans-serif" font-size="12" fill="#C8853A" text-anchor="middle" letter-spacing="5">REVIVAL STRENGTH</text>
+</svg>
+  <div class="footer-copy">© 2026 Revival Strength. All rights reserved.</div>
+</footer>
+
+<!-- ── LEAD MAGNET POPUP ── -->
+<div id="popup-overlay" class="popup-overlay">
+  <div class="popup-card">
+
+    <button class="popup-close" id="popup-close" aria-label="Close">✕</button>
+
+    <!-- Left: Book mockup -->
+    <div class="popup-left">
+      <div class="popup-book">
+        <div class="popup-book-spine"></div>
+        <img src="assets/blueprint-cover.jpg" alt="The Peak Performance Blueprint" class="popup-cover-img" />
+      </div>
+      <div class="popup-book-glow"></div>
+    </div>
+
+    <!-- Right: Form -->
+    <div class="popup-right">
+      <div class="popup-eyebrow">FREE DOWNLOAD</div>
+      <h2 class="popup-headline">Get the Blueprint.<br><em>Transform Your Life.</em></h2>
+      <p class="popup-body">My complete guide to mastering the four habits that drive peak performance — nutrition, movement, sleep & community. Yours free, instantly.</p>
+
+      <div class="popup-perks">
+        <div class="popup-perk"><span class="perk-dot">✓</span> Real food strategies that actually work</div>
+        <div class="popup-perk"><span class="perk-dot">✓</span> Sleep optimization tips for more energy</div>
+        <div class="popup-perk"><span class="perk-dot">✓</span> Movement principles for lifelong strength</div>
+        <div class="popup-perk"><span class="perk-dot">✓</span> How to build your performance community</div>
+      </div>
+
+      <form class="popup-form" id="popup-form" onsubmit="handlePopupSubmit(event)">
+        <input type="text" placeholder="First Name" class="popup-input" required />
+        <input type="email" placeholder="Email Address" class="popup-input" required />
+        <button type="submit" class="popup-submit">SEND ME THE BLUEPRINT →</button>
+        <p class="popup-privacy">No spam. Unsubscribe anytime. Your info stays with us.</p>
+      </form>
+
+      <div class="popup-success" id="popup-success">
+        <div class="success-icon">🎉</div>
+        <h3>You're in!</h3>
+        <p>Check your inbox — your copy of The Peak Performance Blueprint is on its way.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  /* ── POPUP STYLES ── */
+  .popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(6, 14, 22, 0.88);
+    backdrop-filter: blur(8px);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+  .popup-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .popup-card {
+    background: var(--dark);
+    border: 1px solid rgba(200,133,58,0.2);
+    border-radius: 6px;
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    max-width: 860px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    transform: translateY(30px) scale(0.97);
+    transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+    box-shadow: 0 40px 100px rgba(0,0,0,0.6), 0 0 0 1px rgba(200,133,58,0.08);
+  }
+  .popup-overlay.active .popup-card {
+    transform: translateY(0) scale(1);
+  }
+
+  .popup-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.2rem;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 1.1rem;
+    cursor: pointer;
+    z-index: 10;
+    transition: color 0.2s;
+    line-height: 1;
+    padding: 0.3rem;
+  }
+  .popup-close:hover { color: var(--white); }
+
+  /* Left panel */
+  .popup-left {
+    background: linear-gradient(145deg, #0f2535 0%, #091520 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .popup-left::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 60%, rgba(200,133,58,0.12) 0%, transparent 70%);
+  }
+
+  .popup-book {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.5));
+    transform: perspective(600px) rotateY(-8deg);
+    transition: transform 0.4s ease;
+  }
+  .popup-book:hover {
+    transform: perspective(600px) rotateY(-3deg);
+  }
+
+  .popup-book-spine {
+    width: 18px;
+    background: linear-gradient(to right, #7a4e1f, #a06828);
+    border-radius: 2px 0 0 2px;
+    flex-shrink: 0;
+  }
+
+  .popup-book-cover {
+    background: linear-gradient(160deg, #1a3345 0%, #0d1f2d 100%);
+    border: 1px solid rgba(200,133,58,0.3);
+    border-left: none;
+    border-radius: 0 3px 3px 0;
+    padding: 1.8rem 1.4rem;
+    width: 190px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    min-height: 260px;
+  }
+
+  .popup-book-logo { margin-bottom: 0.3rem; }
+
+  .popup-book-tag {
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    border: 1px solid rgba(200,133,58,0.4);
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    border-radius: 20px;
+    width: fit-content;
+  }
+
+  .popup-book-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.55rem;
+    line-height: 1.0;
+    letter-spacing: 0.03em;
+    color: var(--white);
+    margin-top: 0.3rem;
+  }
+
+  .popup-book-sub {
+    font-size: 0.7rem;
+    color: var(--muted);
+    line-height: 1.5;
+    font-weight: 300;
+    font-family: 'DM Sans', sans-serif;
+    flex: 1;
+  }
+
+  .popup-book-author {
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+    color: rgba(200,133,58,0.7);
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    margin-top: auto;
+    padding-top: 0.8rem;
+    border-top: 1px solid rgba(200,133,58,0.15);
+  }
+
+  .popup-cover-img {
+    width: 200px;
+    border-radius: 0 4px 4px 0;
+    display: block;
+    object-fit: cover;
+  }
+
+  .popup-book-glow {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    height: 40px;
+    background: rgba(200,133,58,0.25);
+    border-radius: 50%;
+    filter: blur(18px);
+    z-index: 0;
+  }
+
+  /* Right panel */
+  .popup-right {
+    padding: 2.8rem 2.5rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .popup-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .popup-headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.1rem;
+    line-height: 1.05;
+    letter-spacing: 0.02em;
+    color: var(--white);
+  }
+  .popup-headline em {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .popup-body {
+    font-size: 0.87rem;
+    color: var(--muted);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  .popup-perks {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin: 0.2rem 0;
+  }
+  .popup-perk {
+    font-size: 0.82rem;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 300;
+  }
+  .perk-dot {
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+
+  .popup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    margin-top: 0.4rem;
+  }
+
+  .popup-input {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 3px;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    padding: 0.85rem 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  .popup-input::placeholder { color: var(--muted); }
+  .popup-input:focus { border-color: rgba(200,133,58,0.5); }
+
+  .popup-submit {
+    background: var(--gold);
+    color: var(--darker);
+    border: none;
+    border-radius: 3px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    padding: 1rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+    width: 100%;
+  }
+  .popup-submit:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  .popup-privacy {
+    font-size: 0.72rem;
+    color: rgba(143,165,180,0.5);
+    text-align: center;
+  }
+
+  /* Success state */
+  .popup-success {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem 0;
+    gap: 0.8rem;
+  }
+  .popup-success.show { display: flex; }
+  .popup-form.hide { display: none; }
+
+  .success-icon { font-size: 2.5rem; }
+  .popup-success h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.05em;
+    color: var(--gold);
+  }
+  .popup-success p {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.6;
+    max-width: 280px;
+  }
+
+  /* No-scroll when popup open */
+  body.popup-open { overflow: hidden; }
+</style>
+
+<script>
+  // Intersection Observer for fade-up animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // ── POPUP LOGIC ──
+  const overlay = document.getElementById('popup-overlay');
+  const closeBtn = document.getElementById('popup-close');
+
+  function openPopup() {
+    overlay.classList.add('active');
+    document.body.classList.add('popup-open');
+  }
+
+  function closePopup() {
+    overlay.classList.remove('active');
+    document.body.classList.remove('popup-open');
+  }
+
+  // Show after 2.5 seconds on load (unless already dismissed this session)
+  window.addEventListener('load', () => {
+    if (!sessionStorage.getItem('popupDismissed')) {
+      setTimeout(openPopup, 2500);
+    }
+  });
+
+  // Close on X button
+  closeBtn.addEventListener('click', () => {
+    sessionStorage.setItem('popupDismissed', 'true');
+    closePopup();
+  });
+
+  // Close on overlay click
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      sessionStorage.setItem('popupDismissed', 'true');
+      closePopup();
+    }
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      sessionStorage.setItem('popupDismissed', 'true');
+      closePopup();
+    }
+  });
+
+  // Handle form submission
+  function handlePopupSubmit(e) {
+    e.preventDefault();
+    const form = document.getElementById('popup-form');
+    const success = document.getElementById('popup-success');
+    form.classList.add('hide');
+    success.classList.add('show');
+    // 👉 Connect your email provider (Mailchimp, ConvertKit, etc.) here
+  }
+</script>
+</body>
+</html>

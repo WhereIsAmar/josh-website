@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Work With Josh — Revival Strength</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+ :root {
+ --gold: #C8853A;
+ --gold-light: #E8A055;
+ --dark: #0D1F2D;
+ --darker: #091520;
+ --mid: #1A3345;
+ --white: #F5F0E8;
+ --muted: #8FA5B4;
+ }
+
+ *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ html { scroll-behavior: smooth; }
+ body {
+ font-family: 'DM Sans', sans-serif;
+ background: var(--darker);
+ color: var(--white);
+ overflow-x: hidden;
+ }
+
+ /* ── NAV ── */
+ nav {
+ position: fixed;
+ top: 0; left: 0; right: 0;
+ z-index: 100;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ padding: 1.4rem 4rem;
+ background: rgba(9,21,32,0.9);
+ backdrop-filter: blur(12px);
+ border-bottom: 1px solid rgba(200,133,58,0.15);
+ }
+ .nav-logo-link { text-decoration: none; }
+ .nav-back {
+ font-size: 0.78rem;
+ letter-spacing: 0.15em;
+ text-transform: uppercase;
+ color: var(--muted);
+ text-decoration: none;
+ display: flex;
+ align-items: center;
+ gap: 0.5rem;
+ transition: color 0.2s;
+ }
+ .nav-back:hover { color: var(--gold); }
+ .nav-cta {
+ background: var(--gold);
+ color: var(--darker);
+ font-size: 0.78rem;
+ font-weight: 600;
+ letter-spacing: 0.12em;
+ text-transform: uppercase;
+ text-decoration: none;
+ padding: 0.6rem 1.4rem;
+ border-radius: 2px;
+ transition: background 0.2s;
+ }
+ .nav-cta:hover { background: var(--gold-light); }
+
+ /* ── PAGE HEADER ── */
+ .page-header {
+ padding: 10rem 5rem 5rem;
+ text-align: center;
+ position: relative;
+ overflow: hidden;
+ }
+ .page-header::before {
+ content: '';
+ position: absolute;
+ top: 0; left: 50%; transform: translateX(-50%);
+ width: 70vw; height: 70vw;
+ border-radius: 50%;
+ background: radial-gradient(circle, rgba(200,133,58,0.07) 0%, transparent 65%);
+ pointer-events: none;
+ }
+ .page-eyebrow {
+ font-size: 0.7rem;
+ letter-spacing: 0.35em;
+ text-transform: uppercase;
+ color: var(--gold);
+ font-weight: 500;
+ margin-bottom: 1.2rem;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ gap: 0.8rem;
+ }
+ .page-eyebrow::before, .page-eyebrow::after {
+ content: '';
+ width: 2rem; height: 1px;
+ background: var(--gold);
+ }
+ .page-title {
+ font-family: 'Bebas Neue', sans-serif;
+ font-size: clamp(3.5rem, 7vw, 7rem);
+ line-height: 0.95;
+ letter-spacing: 0.02em;
+ margin-bottom: 1.5rem;
+ }
+ .page-title em {
+ font-family: 'DM Serif Display', serif;
+ font-style: italic;
+ color: var(--gold);
+ }
+ .page-sub {
+ font-size: 1rem;
+ color: var(--muted);
+ max-width: 520px;
+ margin: 0 auto;
+ line-height: 1.75;
+ font-weight: 300;
+ }
+
+ /* ── DIVIDER ── */
+ .divider {
+ display: flex;
+ align-items: center;
+ gap: 1.5rem;
+ padding: 0 5rem;
+ margin-bottom: 1rem;
+ }
+ .divider-line { flex: 1; height: 1px; background: rgba(255,255,255,0.06); }
+ .divider-icon { color: var(--gold); font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500; white-space: nowrap; }
+
+ /* ── OFFERINGS GRID ── */
+ .offerings {
+ padding: 3rem 5rem 7rem;
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+ gap: 1.5rem;
+ align-items: stretch;
+ }
+
+ /* ── CARD ── */
+ .card {
+ background: var(--dark);
+ border: 1px solid rgba(255,255,255,0.06);
+ border-radius: 4px;
+ overflow: hidden;
+ display: flex;
+ flex-direction: column;
+ transition: border-color 0.3s, transform 0.3s;
+ position: relative;
+ }
+ .card:hover {
+ border-color: rgba(200,133,58,0.3);
+ transform: translateY(-4px);
+ }
+ .card.featured {
+ border-color: rgba(200,133,58,0.4);
+ background: linear-gradient(160deg, #162a3a 0%, #0d1f2d 100%);
+ }
+
+ .card-badge {
+ position: absolute;
+ top: 1.2rem; right: 1.2rem;
+ background: var(--gold);
+ color: var(--darker);
+ font-size: 0.6rem;
+ font-weight: 700;
+ letter-spacing: 0.15em;
+ text-transform: uppercase;
+ padding: 0.3rem 0.7rem;
+ border-radius: 20px;
+ }
+
+ .card-top {
+ padding: 2.5rem 2.5rem 0;
+ }
+
+ .card-icon {
+ width: 3rem;
+ height: 3rem;
+ background: rgba(200,133,58,0.1);
+ border: 1px solid rgba(200,133,58,0.2);
+ border-radius: 50%;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ margin-bottom: 1.5rem;
+ font-size: 1.2rem;
+ }
+
+ .card-label {
+ font-size: 0.65rem;
+ letter-spacing: 0.25em;
+ text-transform: uppercase;
+ color: var(--gold);
+ font-weight: 500;
+ margin-bottom: 0.6rem;
+ }
+
+ .card-title {
+ font-family: 'Bebas Neue', sans-serif;
+ font-size: 2rem;
+ letter-spacing: 0.04em;
+ line-height: 1;
+ margin-bottom: 1rem;
+ }
+
+ .card-desc {
+ font-size: 0.88rem;
+ color: var(--muted);
+ line-height: 1.75;
+ font-weight: 300;
+ padding-bottom: 2rem;
+ border-bottom: 1px solid rgba(255,255,255,0.06);
+ }
+
+ /* Price */
+ .card-price-wrap {
+ padding: 1.8rem 2.5rem;
+ display: flex;
+ align-items: baseline;
+ gap: 0.4rem;
+ }
+ .card-price {
+ font-family: 'Bebas Neue', sans-serif;
+ font-size: 3rem;
+ color: var(--white);
+ line-height: 1;
+ letter-spacing: 0.02em;
+ }
+ .card-price-unit {
+ font-size: 0.8rem;
+ color: var(--muted);
+ letter-spacing: 0.08em;
+ text-transform: uppercase;
+ }
+ .card-price-note {
+ font-size: 0.75rem;
+ color: rgba(143,165,180,0.6);
+ padding: 0 2.5rem 1.2rem;
+ margin-top: -1rem;
+ }
+
+ /* Includes list */
+ .card-includes {
+ padding: 0 2.5rem 2rem;
+ display: flex;
+ flex-direction: column;
+ gap: 0.65rem;
+ }
+ .card-includes-label {
+ font-size: 0.65rem;
+ letter-spacing: 0.2em;
+ text-transform: uppercase;
+ color: var(--muted);
+ font-weight: 500;
+ margin-bottom: 0.3rem;
+ }
+ .include-item {
+ display: flex;
+ align-items: flex-start;
+ gap: 0.7rem;
+ font-size: 0.84rem;
+ color: var(--white);
+ font-weight: 300;
+ line-height: 1.5;
+ }
+ .include-check {
+ color: var(--gold);
+ font-weight: 700;
+ font-size: 0.75rem;
+ margin-top: 0.15rem;
+ flex-shrink: 0;
+ }
+
+ /* CTA */
+ .card-footer {
+ padding: 0 2.5rem 2.5rem;
+ margin-top: auto;
+ }
+ .card-btn {
+ display: block;
+ width: 100%;
+ text-align: center;
+ text-decoration: none;
+ padding: 1rem;
+ border-radius: 3px;
+ font-family: 'DM Sans', sans-serif;
+ font-size: 0.8rem;
+ font-weight: 600;
+ letter-spacing: 0.12em;
+ text-transform: uppercase;
+ transition: all 0.2s;
+ }
+ .card-btn-primary {
+ background: var(--gold);
+ color: var(--darker);
+ }
+ .card-btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+ .card-btn-outline {
+ background: transparent;
+ color: var(--white);
+ border: 1px solid rgba(255,255,255,0.15);
+ }
+ .card-btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+ /* ── HOW IT WORKS ── */
+ .how-it-works {
+ background: var(--dark);
+ padding: 6rem 5rem;
+ text-align: center;
+ }
+ .section-label {
+ font-size: 0.7rem;
+ letter-spacing: 0.35em;
+ text-transform: uppercase;
+ color: var(--gold);
+ font-weight: 500;
+ margin-bottom: 1rem;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ gap: 0.8rem;
+ }
+ .section-label::before, .section-label::after {
+ content: ''; width: 1.5rem; height: 1px; background: var(--gold);
+ }
+ .section-title {
+ font-family: 'Bebas Neue', sans-serif;
+ font-size: clamp(2.5rem, 4vw, 4rem);
+ line-height: 1;
+ letter-spacing: 0.02em;
+ margin-bottom: 4rem;
+ }
+ .steps {
+ display: grid;
+ grid-template-columns: repeat(4, 1fr);
+ gap: 1px;
+ background: rgba(255,255,255,0.04);
+ border-radius: 4px;
+ overflow: hidden;
+ max-width: 960px;
+ margin: 0 auto;
+ }
+ .step {
+ background: var(--dark);
+ padding: 2.5rem 2rem;
+ text-align: left;
+ position: relative;
+ }
+ .step-num {
+ font-family: 'Bebas Neue', sans-serif;
+ font-size: 3.5rem;
+ color: rgba(200,133,58,0.12);
+ line-height: 1;
+ margin-bottom: 1rem;
+ }
+ .step-title {
+ font-family: 'Bebas Neue', sans-serif;
+ font-size: 1.3rem;
+ letter-spacing: 0.05em;
+ margin-bottom: 0.6rem;
+ }
+ .step-desc {
+ font-size: 0.83rem;
+ color: var(--muted);
+ line-height: 1.65;
+ font-weight: 300;
+ }
+
+ /* ── FAQ ── */
+ .faq-section {
+ padding: 6rem 5rem;
+ max-width: 780px;
+ margin: 0 auto;
+ }
+ .faq-item {
+ border-bottom: 1px solid rgba(255,255,255,0.06);
+ padding: 1.8rem 0;
+ cursor: pointer;
+ }
+ .faq-question {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ gap: 1rem;
+ }
+ .faq-q-text {
+ font-family: 'Bebas Neue', sans-serif;
+ font-size: 1.2rem;
+ letter-spacing: 0.04em;
+ color: var(--white);
+ }
+ .faq-toggle {
+ color: var(--gold);
+ font-size: 1.2rem;
+ flex-shrink: 0;
+ transition: transform 0.3s;
+ font-weight: 300;
+ }
+ .faq-item.open .faq-toggle { transform: rotate(45deg); }
+ .faq-answer {
+ font-size: 0.88rem;
+ color: var(--muted);
+ line-height: 1.75;
+ font-weight: 300;
+ max-height: 0;
+ overflow: hidden;
+ transition: max-height 0.4s ease, padding 0.3s;
+ }
+ .faq-item.open .faq-answer {
+ max-height: 300px;
+ padding-top: 1rem;
+ }
+
+ /* ── FINAL CTA ── */
+ .final-cta {
+ background: var(--mid);
+ padding: 7rem 5rem;
+ text-align: center;
+ position: relative;
+ overflow: hidden;
+ }
+ .final-cta::before {
+ content: '';
+ position: absolute;
+ inset: 0;
+ background: radial-gradient(ellipse at 50% 0%, rgba(200,133,58,0.08) 0%, transparent 65%);
+ pointer-events: none;
+ }
+ .final-cta .page-title { font-size: clamp(3rem, 5vw, 5rem); margin-bottom: 1rem; }
+ .final-cta p { color: var(--muted); font-size: 1rem; line-height: 1.7; font-weight: 300; max-width: 460px; margin: 0 auto 2.5rem; }
+ .btn-primary {
+ background: var(--gold);
+ color: var(--darker);
+ font-family: 'DM Sans', sans-serif;
+ font-size: 0.82rem;
+ font-weight: 600;
+ letter-spacing: 0.15em;
+ text-transform: uppercase;
+ text-decoration: none;
+ padding: 1.1rem 2.5rem;
+ border-radius: 2px;
+ display: inline-block;
+ transition: background 0.2s, transform 0.15s;
+ }
+ .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+ /* ── FOOTER ── */
+ footer {
+ background: var(--darker);
+ border-top: 1px solid rgba(255,255,255,0.06);
+ padding: 2rem 5rem;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ }
+ .footer-copy { font-size: 0.75rem; color: rgba(143,165,180,0.4); }
+
+ /* ── FADE IN ── */
+ .fade-up {
+ opacity: 0;
+ transform: translateY(24px);
+ transition: opacity 0.6s ease, transform 0.6s ease;
+ }
+ .fade-up.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+ <a href="index.html" class="nav-back">← Back to Home</a>
+ <svg viewBox="0 0 240 90" fill="none" xmlns="http://www.w3.org/2000/svg" style="height:48px;width:auto;">
+ <circle cx="18" cy="45" r="16" fill="none" stroke="#C8853A" stroke-width="7"/>
+ <rect x="34" y="38" width="8" height="14" rx="2" fill="#C8853A"/>
+ <rect x="42" y="42" width="32" height="6" rx="2" fill="#C8853A"/>
+ <rect x="166" y="42" width="32" height="6" rx="2" fill="#C8853A"/>
+ <rect x="198" y="38" width="8" height="14" rx="2" fill="#C8853A"/>
+ <circle cx="222" cy="45" r="16" fill="none" stroke="#C8853A" stroke-width="7"/>
+ <path d="M74 36 L97 28 L120 50 L143 28 L166 36 L120 68 Z" fill="#C8853A"/>
+ <text x="120" y="84" font-family="'Bebas Neue', sans-serif" font-size="12" fill="#C8853A" text-anchor="middle" letter-spacing="5">REVIVAL STRENGTH</text>
+ </svg>
+ <a href="#apply" class="nav-cta">Apply For Coaching</a>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+ <div class="page-eyebrow fade-up">Work With Josh</div>
+ <h1 class="page-title fade-up">CHOOSE YOUR<br><em>Path Forward.</em></h1>
+ <p class="page-sub fade-up">Every offering is built around one goal — helping you become the strongest, healthiest, most capable version of yourself. Pick the path that fits your life.</p>
+</div>
+
+<div class="divider fade-up">
+ <div class="divider-line"></div>
+ <div class="divider-icon">3 Ways to Work Together</div>
+ <div class="divider-line"></div>
+</div>
+
+<!-- OFFERINGS -->
+<div class="offerings">
+
+ <!-- 1-on-1 In-Person -->
+ <div class="card fade-up">
+ <div class="card-badge">Limited Spots</div>
+ <div class="card-top">
+ <div class="card-icon">🏋️</div>
+ <div class="card-label">In-Person · 1-on-1</div>
+ <div class="card-title">1-ON-1 PERSONAL COACHING</div>
+ <p class="card-desc">Train directly with Josh in a fully private, in-person setting. Every session is built around you — your goals, your body, your timeline.</p>
+ </div>
+ <div class="card-price-wrap">
+ <div class="card-price">$150</div>
+ <div class="card-price-unit">/ session</div>
+ </div>
+ <p class="card-price-note">12 or 24 session commitment · Denver area</p>
+ <div class="card-includes">
+ <div class="card-includes-label">What's Included</div>
+ <div class="include-item"><span class="include-check">✓</span> 1-on-1 sessions with Josh</div>
+ <div class="include-item"><span class="include-check">✓</span> Individualized Programming</div>
+ <div class="include-item"><span class="include-check">✓</span> Real-time coaching & cueing</div>
+ <div class="include-item"><span class="include-check">✓</span> Functional strength focus</div>
+ <div class="include-item"><span class="include-check">✓</span> Nutrition guidance included</div>
+ </div>
+ <div class="card-footer">
+ <a href="#apply" class="card-btn card-btn-outline">Apply For Coaching</a>
+ </div>
+ </div>
+
+ <!-- Online Coaching — FEATURED -->
+ <div class="card featured fade-up" style="transition-delay:0.1s">
+ <div class="card-badge">Most Popular</div>
+ <div class="card-top">
+ <div class="card-icon">📱</div>
+ <div class="card-label">Online · App-Based</div>
+ <div class="card-title">REMOTE COACHING</div>
+ <p class="card-desc"> Full coaching system delivered through a dedicated app. Your program, your schedule, your goals — built around your life no matter where you are. Nutrition coaching included.</p>
+ </div>
+ <div class="card-price-wrap">
+ <div class="card-price">$450</div>
+ <div class="card-price-unit">/ month</div>
+ </div>
+ <p class="card-price-note">Starting at · custom plans available</p>
+ <div class="card-includes">
+ <div class="card-includes-label">What's Included</div>
+ <div class="include-item"><span class="include-check">✓</span> Individualized programming via coaching app</div>
+ <div class="include-item"><span class="include-check">✓</span> Nutrition coaching & meal guidance</div>
+ <div class="include-item"><span class="include-check">✓</span> Bi-weekly check-ins & progress tracking</div>
+ <div class="include-item"><span class="include-check">✓</span> Direct messaging access to Josh</div>
+ <div class="include-item" style="padding-left:1.6rem;"><em style="font-size:0.75rem;color:var(--muted);font-style:italic;">Available during normal business hours</em></div>
+ <div class="include-item"><span class="include-check">✓</span> Program adjustments around travel & work</div>
+ <div class="include-item"><span class="include-check">✓</span> Video form reviews</div>
+ </div>
+ <div class="card-footer">
+ <a href="#apply" class="card-btn card-btn-primary">Apply For Coaching</a>
+ </div>
+ </div>
+
+ <!-- The Revival System -->
+ <div class="card fade-up" style="transition-delay:0.2s; border-color: rgba(200,133,58,0.5); background: linear-gradient(160deg, #1a2e1a 0%, #0d1f2d 100%);">
+ <div class="card-badge" style="background: linear-gradient(135deg, #C8853A, #E8A055);">Limited Spots</div>
+ <div class="card-top">
+ <div class="card-icon">⚡</div>
+ <div class="card-label">The Ultimate Package</div>
+ <div class="card-title">THE REVIVAL SYSTEM</div>
+ <p class="card-desc">This is the most elite, all-in offering — built for those who are fully committed to transformation. Every aspect of your performance is covered: training, nutrition, lifestyle, and mindset. This isn't a program. It's a complete system designed to revive the best version of you.</p>
+ </div>
+ <div class="card-price-wrap">
+ <div class="card-price">$2,000</div>
+ <div class="card-price-unit">/ month</div>
+ </div>
+ <p class="card-price-note">6-month commitment · Limited spots available</p>
+ <div class="card-includes">
+ <div class="card-includes-label">Everything Included</div>
+ <div class="include-item"><span class="include-check">✓</span> Individualized Programming</div>
+ <div class="include-item"><span class="include-check">✓</span> Personalized real-food eating strategy & meal plan build out</div>
+ <div class="include-item"><span class="include-check">✓</span> Lifestyle Coaching — habit-based approach that lasts</div>
+ <div class="include-item"><span class="include-check">✓</span> Weekly check-ins & progress tracking</div>
+ <div class="include-item"><span class="include-check">✓</span> Program adjustments around travel & work</div>
+ <div class="include-item"><span class="include-check">✓</span> Video form reviews</div>
+ <div class="include-item"><span class="include-check" style="color:#E8A055;">✓</span> <span style="color:var(--gold);font-weight:500;">Exclusive Access to Josh</span></div>
+ </div>
+ <div class="card-footer">
+ <a href="#apply" class="card-btn card-btn-primary" style="background: linear-gradient(135deg, #C8853A, #E8A055);">Apply For The Revival System</a>
+ </div>
+ </div>
+
+</div>
+
+<!-- HOW IT WORKS -->
+<div class="how-it-works">
+ <div class="section-label fade-up">The Process</div>
+ <h2 class="section-title fade-up">HOW IT WORKS</h2>
+ <div class="steps">
+ <div class="step fade-up">
+ <div class="step-num">01</div>
+ <div class="step-title">Apply</div>
+ <p class="step-desc">Fill out a short application so Josh can understand your goals, history, and lifestyle.</p>
+ </div>
+ <div class="step fade-up" style="transition-delay:0.1s">
+ <div class="step-num">02</div>
+ <div class="step-title">Connect</div>
+ <p class="step-desc">Josh reviews your application and schedules a free intro call to make sure it's the right fit.</p>
+ </div>
+ <div class="step fade-up" style="transition-delay:0.2s">
+ <div class="step-num">03</div>
+ <div class="step-title">Build</div>
+ <p class="step-desc">Your custom program is built around your schedule, goals, and current fitness level.</p>
+ </div>
+ <div class="step fade-up" style="transition-delay:0.3s">
+ <div class="step-num">04</div>
+ <div class="step-title">Execute</div>
+ <p class="step-desc">Train, improve, and evolve. Josh is in your corner every step of the way.</p>
+ </div>
+ </div>
+</div>
+
+<!-- FAQ -->
+<div class="faq-section">
+ <div class="section-label fade-up">FAQ</div>
+ <h2 class="section-title fade-up">COMMON QUESTIONS</h2>
+
+ <div class="faq-item fade-up">
+ <div class="faq-question">
+ <span class="faq-q-text">What app do you use for online coaching?</span>
+ <span class="faq-toggle">+</span>
+ </div>
+ <div class="faq-answer">Josh uses a dedicated coaching app that houses your full program, exercise videos, progress tracking, and direct messaging. You'll get full onboarding once you're accepted.</div>
+ </div>
+
+ <div class="faq-item fade-up">
+ <div class="faq-question">
+ <span class="faq-q-text">I travel a lot — can you work around my schedule?</span>
+ <span class="ferk-toggle faq-toggle">+</span>
+ </div>
+ <div class="faq-answer">Absolutely. Programming is built around your life — not the other way around. Travel, busy weeks, and schedule changes are all accounted for. This is one of the biggest advantages of working with Josh.</div>
+ </div>
+
+ <div class="faq-item fade-up">
+ <div class="faq-question">
+ <span class="faq-q-text">Is nutrition coaching really included?</span>
+ <span class="faq-toggle">+</span>
+ </div>
+ <div class="faq-answer">Yes — always. Josh believes you can't separate training from nutrition. Every program includes real-food guidance, grocery strategies, and habit-based eating principles from day one. No extra charge.</div>
+ </div>
+
+ <div class="faq-item fade-up">
+ <div class="faq-question">
+ <span class="faq-q-text">What fitness level do I need to be at?</span>
+ <span class="faq-toggle">+</span>
+ </div>
+ <div class="faq-answer">All levels are welcome. Whether you're just getting started or you're an experienced athlete looking to break through a plateau, Josh meets you exactly where you are and builds from there.</div>
+ </div>
+
+ <div class="faq-item fade-up">
+ <div class="faq-question">
+ <span class="faq-q-text">Where are in-person sessions located?</span>
+ <span class="faq-toggle">+</span>
+ </div>
+ <div class="faq-answer">In-person sessions are based in the Denver, Colorado area. Reach out after applying and Josh will share the specific location details.</div>
+ </div>
+</div>
+
+<!-- FINAL CTA -->
+<div class="final-cta" id="apply">
+ <div class="page-eyebrow fade-up">Ready to Start</div>
+ <h2 class="page-title fade-up">LET'S GET TO<br><em>Work.</em></h2>
+ <p class="fade-up">Spots are limited. Josh keeps his roster intentionally small so every client gets the attention they deserve.</p>
+ <a href="mailto:josh@revivalstrength.com" class="btn-primary fade-up">Apply For Coaching</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+ <svg viewBox="0 0 240 90" fill="none" xmlns="http://www.w3.org/2000/svg" style="height:36px;width:auto;opacity:0.7;">
+ <circle cx="18" cy="45" r="16" fill="none" stroke="#C8853A" stroke-width="7"/>
+ <rect x="34" y="38" width="8" height="14" rx="2" fill="#C8853A"/>
+ <rect x="42" y="42" width="32" height="6" rx="2" fill="#C8853A"/>
+ <rect x="166" y="42" width="32" height="6" rx="2" fill="#C8853A"/>
+ <rect x="198" y="38" width="8" height="14" rx="2" fill="#C8853A"/>
+ <circle cx="222" cy="45" r="16" fill="none" stroke="#C8853A" stroke-width="7"/>
+ <path d="M74 36 L97 28 L120 50 L143 28 L166 36 L120 68 Z" fill="#C8853A"/>
+ <text x="120" y="84" font-family="'Bebas Neue', sans-serif" font-size="12" fill="#C8853A" text-anchor="middle" letter-spacing="5">REVIVAL STRENGTH</text>
+ </svg>
+ <div class="footer-copy">© 2026 Revival Strength. All rights reserved.</div>
+</footer>
+
+<script>
+ // Fade-up observer
+ const observer = new IntersectionObserver((entries) => {
+ entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+ }, { threshold: 0.1 });
+ document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+ // FAQ accordion
+ document.querySelectorAll('.faq-item').forEach(item => {
+ item.querySelector('.faq-question').addEventListener('click', () => {
+ const isOpen = item.classList.contains('open');
+ document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+ if (!isOpen) item.classList.add('open');
+ });
+ });
+</script>
+</body>
+</html>
